@@ -11,4 +11,5 @@ $Client = new Ec2Client([
 ]);
 
 $res = $Client->describeInstances([]);
+header("Access-Control-Allow-Origin: *");
 echo json_encode($res['Reservations']);
