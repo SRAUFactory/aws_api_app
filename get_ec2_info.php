@@ -1,9 +1,14 @@
 <?php
 require 'aws/aws-autoloader.php';
 
-$ec2 = new Aws\Ec2\Ec2Client([
-     'region' => 'us-east-1a',
+use Aws\Credentials\CredentialProvider;
+use Aws\Ec2\Ec2Client;
+
+$Client = new Ec2Client([
+     'region' => 'us-east-1',
      'version' => 'latest',
+     'credentials' => CredentialProvider::env(),
 ]);
 
-var_dump($ec2);
+$res = $Client->describeInstances([]);
+echo json_encode($res['Reservations']);
